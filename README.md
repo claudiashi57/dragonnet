@@ -19,8 +19,11 @@ We also uploaded a portion of the simulated data in the dat folder.
 2. ACIC
 ACIC is a collection of semi-synthetic datasets derived from the linked birth and infant death data (LBIDD)
 Here is the full dataset description `https://www.researchgate.net/publication/11523952_Infant_Mortality_Statistics_from_the_1999_Period_Linked_BirthInfant_Death_Data_Set`
+
 Here is the github repo associated with the competition with some sample data `https://github.com/IBM-HRL-MLHLS/IBM-Causal-Inference-Benchmarking-Framework/blob/master/data/LBIDD/scaling_params.csv`
-For acces to the ACIC 2018 competition data: Please see here `https://www.synapse.org/#!Synapse:syn11294478/wiki/486304`
+
+
+For access to the ACIC 2018 competition data: Please see here `https://www.synapse.org/#!Synapse:syn11294478/wiki/486304`
 
 # Reproducing the IHDP experiments
 The default setting would let you run dragonnet, tarnet, and nednet under targeted regularization and default mode

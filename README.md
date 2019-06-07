@@ -1,6 +1,6 @@
 # Introduction
 
-This repository contains software and data for "Adapting Neural Networks for the Estimation of Treatment Effects" (`arxiv:https://arxiv.org/pdf/1906.02120.pdf`).
+This repository contains software and data for "Adapting Neural Networks for the Estimation of Treatment Effects" (`https://arxiv.org/pdf/1906.02120.pdf`).
 The paper describes the use of neural networks for the estimation of treatment effects from observational data.
 
 

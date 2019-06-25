@@ -1,8 +1,6 @@
 # Introduction
 
-This repository contains software and data for "Adapting Neural Networks for the Estimation of Treatment Effects" (`https://arxiv.org/pdf/1906.02120.pdf`).
-The paper describes the use of neural networks for the estimation of treatment effects from observational data.
-
+This repository implements two approaches to estimating causal effects from observational data using neural networks. The high-level idea is to modify standard neural net design and training in order to induce a bias towards accurate estimates. The exact approach is described in "Adapting Neural Networks for the Estimation of Treatment Effects" (`https://arxiv.org/pdf/1906.02120.pdf`).
 
 
 # Requirements and setup

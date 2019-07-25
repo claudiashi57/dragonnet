@@ -2,14 +2,16 @@
 
 
 options=(
-    dragonnet
+
     nednet
-    tarnet
+
 )
 
 for i in ${options[@]}; do
     echo $i
-    python -m experiment.dragonnet --data_base_dir ../data/ihdp/csv\
+    python -m experiment.dragonnet --data_base_dir /Users/claudiashi/data/ihdp_csv_1-1000/csv\
                                  --knob $i\
-                                 --output_base_dir ../result/ihdp_paper/dep
+                                 --output_base_dir /Users/claudiashi/result/ihdp_dep\
+                                 --dataset 'ihdp'\
+
 done

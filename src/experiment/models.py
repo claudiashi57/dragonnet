@@ -120,6 +120,7 @@ def make_dragonnet(input_dim, reg_l2):
     x = Dense(units=200, activation='elu', kernel_initializer='RandomNormal')(x)
     x = Dense(units=200, activation='elu', kernel_initializer='RandomNormal')(x)
 
+
     t_predictions = Dense(units=1, activation='sigmoid')(x)
 
     # HYPOTHESIS
@@ -181,6 +182,7 @@ def make_tarnet(input_dim, reg_l2):
     # logging.info(epsilons)
     concat_pred = Concatenate(1)([y0_predictions, y1_predictions, t_predictions, epsilons])
     model = Model(inputs=inputs, outputs=concat_pred)
+
 
     return model
 

@@ -3,7 +3,7 @@
 
 options=(
 
-    nednet
+    tarnet
 
 )
 

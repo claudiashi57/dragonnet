@@ -33,20 +33,19 @@ def _split_output(yt_hat, t, y, y_scaler, x, index):
 
 
 def train_and_predict_dragons(t, y_unscaled, x, targeted_regularization=True, output_dir='',
-                              knob_loss=dragonnet_loss_binarycross, ratio=1., dragon=1,val_split=0.2,batch_size=512):
+                              knob_loss=dragonnet_loss_binarycross, ratio=1., dragon=1, val_split=0.2,batch_size=512):
 
     verbose=1
     y_scaler = StandardScaler().fit(y_unscaled)
     y = y_scaler.transform(y_unscaled)
     train_outputs = []
     test_outputs = []
-    runs = 25
+    runs = 1
     for i in range(runs):
         if dragon == 0:
 
             dragonnet = make_tarnet(x.shape[1], 0.01)
         elif dragon == 1:
-
             dragonnet = make_dragonnet(x.shape[1], 0.01)
 
         metrics = [regression_loss, binary_classification_loss, treatment_accuracy, track_epsilon]
@@ -58,8 +57,10 @@ def train_and_predict_dragons(t, y_unscaled, x, targeted_regularization=True, ou
 
         tf.random.set_random_seed(i)
         np.random.seed(i)
-        train_index, test_index = train_test_split(np.arange(x.shape[0]), test_size=0.)
+        train_index, test_index = train_test_split(np.arange(x.shape[0]), test_size=0, random_state=1)
         test_index = train_index
+
+
         x_train, x_test = x[train_index], x[test_index]
         y_train, y_test = y[train_index], y[test_index]
         t_train, t_test = t[train_index], t[test_index]
@@ -89,7 +90,8 @@ def train_and_predict_dragons(t, y_unscaled, x, targeted_regularization=True, ou
             TerminateOnNaN(),
             EarlyStopping(monitor='val_loss', patience=40, min_delta=0.),
             ReduceLROnPlateau(monitor='loss', factor=0.5, patience=5, verbose=verbose, mode='auto',
-                              min_delta=0., cooldown=0, min_lr=0)]
+                              min_delta=0., cooldown=0, min_lr=0)
+        ]
 
         # should pick something better!
         sgd_lr = 1e-5
@@ -259,7 +261,7 @@ def run_acic(data_base_dir='../../data/', output_dir='../../dragonnet/',
                             t=t, y=y, sample_id=sample_id, x=x)
 
 
-        for is_targeted_regularization in [True, False]:
+        for is_targeted_regularization in [False]:
             print("Is targeted regularization: {}".format(is_targeted_regularization))
             if dragon == 'nednet':
                 test_outputs, train_outputs = train_and_predict_ned(t, y, x,
@@ -284,14 +286,6 @@ def run_acic(data_base_dir='../../data/', output_dir='../../dragonnet/',
             for num, output in enumerate(train_outputs):
                 np.savez_compressed(os.path.join(train_output_dir, "{}_replication_train.npz".format(num)),
                                     **output)
-
-
-
-
-
-
-
-
 
 
 def run_ihdp(data_base_dir='/Users/claudiashi/data/ihdp_csv', output_dir='~/result/ihdp/',

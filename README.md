@@ -37,3 +37,9 @@ If you only want to run one of the frameworks, delete the rest of the options in
 Same as above except you run the from `src` code as `./experiment/run_acic.sh`
 
 # Computing the ATE
+All of the estimators functions are in `semi_parametric_estimation.ate`
+
+To reproduce the table in the paper: i)get the neural net predictions; ii) update the output file location in `ihdp_ate.py` iii) run `ihdp_ate.py`. The `make_table` function would generate the mean absolute error for each frameworks. 
+
+Note: the default code use all the data for prediction and estimation. If you want to get the in-sample or out-sample error: i) change the `train_test_split` criteria in `ihdp_main.py`; ii) rerun the neural net training; iii) run `ihdp_ate.py` with apporiate in-sample data and out-sample data. 
+

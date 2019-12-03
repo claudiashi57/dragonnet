@@ -43,7 +43,7 @@ The workflow consist of two stages:
 * After you get the predictions, you want to fit them into estimators. 
 * Run `ihdp_ate.py` to reproduce the table. 
 
-3. Things to note when are reproducing the result: 
+3. Things to note when reproducing the result: 
 
 * The default setting would let you run Dragonnet, TARNET, and NEDnet under both targeted regularization and default mode. If you want to run a subset of the models, delete them at the `run_ihdp.sh`
 

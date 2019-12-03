@@ -26,7 +26,7 @@ Here is the full dataset description [data set description](https://www.research
 For access to the ACIC 2018 competition data: Please see here [ACIC data] (https://www.synapse.org/#!Synapse:syn11294478/wiki/486304)
 
 # Reproducing the IHDP experiments
-The workflow consist of two stages:
+The workflow consists of two stages:
 
 1. Fitting a predictor:
 

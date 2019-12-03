@@ -1,4 +1,5 @@
 import numpy as np
+import numpy as np
 from scipy.special import logit
 
 import sklearn.linear_model as lm
@@ -19,7 +20,7 @@ def calibrate_g(g, t):
     return calibrated_g
 
 
-def truncate_by_g(attribute, g, level=0.1):
+def truncate_by_g(attribute, g, level=0.01):
     keep_these = np.logical_and(g >= level, g <= 1.-level)
 
     return attribute[keep_these]

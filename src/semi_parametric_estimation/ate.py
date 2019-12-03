@@ -62,9 +62,6 @@ def psi_tmle_cont_outcome(q_t0, q_t1, g, t, y, eps_hat=None, truncate_level=0.05
     initial_loss = np.mean(np.square(full_q-y))
     final_loss = np.mean(np.square(q1(t)-y))
 
-    print("tmle epsilon_hat: ", eps_hat)
-    print("initial risk: {}".format(initial_loss))
-    print("final risk: {}".format(final_loss))
 
     return psi_tmle, psi_tmle_std, eps_hat, initial_loss, final_loss, g_loss
 

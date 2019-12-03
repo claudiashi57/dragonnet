@@ -242,3 +242,4 @@ def post_cut(nednet, input_dim, reg_l2=0.01):
 
     model = Model(inputs=input, outputs=concat_pred)
     return model
+

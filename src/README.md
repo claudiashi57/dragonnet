@@ -31,7 +31,7 @@ The workflow consist of two stages:
 1. Fitting a predictor:
 
 * You'll run the from `src` code as `./experiment/run_ihdp.sh`
-* If you are using a cluster, there's some code that might be useful in the submission file. 
+* If you are using a cluster, there's some code that might be useful in the submission folder. 
 
 * Before doing this, you'll need to edit `run_ihdp.sh` and change the following:
 `data_base_dir= where you stored the data`

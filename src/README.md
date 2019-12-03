@@ -11,6 +11,7 @@ You will need to install tensorflow 1.13, sklearn, numpy 1.15, keras 2.2.4 and, 
 # Data
 
 1. IHDP
+
 This dataset is based on a randomized experiment investigating the effect of home visits by specialists on future cognitive scores.
 
 It is generated via the npci package `https://github.com/vdorie/npci`.
@@ -19,6 +20,7 @@ We also uploaded a portion of the simulated data in the dat folder.
 
 
 2. ACIC
+
 ACIC is a collection of semi-synthetic datasets derived from the linked birth and infant death data (LBIDD)
 Here is the full dataset description `https://www.researchgate.net/publication/11523952_Infant_Mortality_Statistics_from_the_1999_Period_Linked_BirthInfant_Death_Data_Set`
 

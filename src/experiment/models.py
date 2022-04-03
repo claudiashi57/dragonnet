@@ -1,6 +1,6 @@
 import tensorflow as tf
 import keras.backend as K
-from keras.engine.topology import Layer
+from tensorflow.keras.layers import Layer
 from keras.metrics import binary_accuracy
 from keras.layers import Input, Dense, Concatenate, BatchNormalization, Dropout
 from keras.models import Model

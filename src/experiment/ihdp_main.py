@@ -6,14 +6,14 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import keras.backend as K
-from keras.optimizers import rmsprop, SGD, Adam
+from tensorflow.keras.optimizers import RMSprop, SGD, Adam
 from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard, ReduceLROnPlateau, TerminateOnNaN
 from experiment.idhp_data import *
 
 
 def _split_output(yt_hat, t, y, y_scaler, x, index):
-    q_t0 = y_scaler.inverse_transform(yt_hat[:, 0].copy())
-    q_t1 = y_scaler.inverse_transform(yt_hat[:, 1].copy())
+    q_t0 = y_scaler.inverse_transform(yt_hat[:, 0].reshape(-1, 1).copy())
+    q_t1 = y_scaler.inverse_transform(yt_hat[:, 1].reshape(-1, 1).copy())
     g = yt_hat[:, 2].copy()
 
     if yt_hat.shape[1] == 4:
@@ -54,9 +54,9 @@ def train_and_predict_dragons(t, y_unscaled, x, targeted_regularization=True, ou
     # for reporducing the IHDP experimemt
 
     i = 0
-    tf.random.set_random_seed(i)
+    tf.random.set_seed(i)
     np.random.seed(i)
-    train_index, test_index = train_test_split(np.arange(x.shape[0]), test_size=0, random_state=1)
+    train_index, test_index = train_test_split(np.arange(x.shape[0]), test_size=0.2, random_state=1)
     test_index = train_index
 
     x_train, x_test = x[train_index], x[test_index]
@@ -69,7 +69,7 @@ def train_and_predict_dragons(t, y_unscaled, x, targeted_regularization=True, ou
     start_time = time.time()
 
     dragonnet.compile(
-        optimizer=Adam(lr=1e-3),
+        optimizer=Adam(learning_rate = 1e-3),
         loss=loss, metrics=metrics)
 
     adam_callbacks = [
@@ -94,7 +94,7 @@ def train_and_predict_dragons(t, y_unscaled, x, targeted_regularization=True, ou
 
     sgd_lr = 1e-5
     momentum = 0.9
-    dragonnet.compile(optimizer=SGD(lr=sgd_lr, momentum=momentum, nesterov=True), loss=loss,
+    dragonnet.compile(optimizer=SGD(learning_rate = sgd_lr, momentum=momentum, nesterov=True), loss=loss,
                       metrics=metrics)
     dragonnet.fit(x_train, yt_train, callbacks=sgd_callbacks,
                   validation_split=val_split,
@@ -148,7 +148,7 @@ def train_and_predict_ned(t, y_unscaled, x, targeted_regularization=True, output
 
 
     nednet.compile(
-        optimizer=Adam(lr=1e-3),
+        optimizer=Adam(learning_rate = 1e-3),
         loss=ned_loss, metrics=metrics_ned)
 
     adam_callbacks = [
@@ -171,7 +171,7 @@ def train_and_predict_ned(t, y_unscaled, x, targeted_regularization=True, output
 
     sgd_lr = 1e-5
     momentum = 0.9
-    nednet.compile(optimizer=SGD(lr=sgd_lr, momentum=momentum, nesterov=True), loss=ned_loss,
+    nednet.compile(optimizer=SGD(learning_rate = sgd_lr, momentum=momentum, nesterov=True), loss=ned_loss,
                    metrics=metrics_ned)
     print(nednet.summary())
     nednet.fit(x_train, yt_train, callbacks=sgd_callbacks,
@@ -186,7 +186,7 @@ def train_and_predict_ned(t, y_unscaled, x, targeted_regularization=True, output
     cut_net = post_cut(nednet, x.shape[1], 0.01)
 
     cut_net.compile(
-        optimizer=Adam(lr=1e-3),
+        optimizer=Adam(learning_rate = 1e-3),
         loss=dead_loss, metrics=metrics_cut)
 
     adam_callbacks = [
@@ -209,7 +209,7 @@ def train_and_predict_ned(t, y_unscaled, x, targeted_regularization=True, output
 
     sgd_lr = 1e-5
     momentum = 0.9
-    cut_net.compile(optimizer=SGD(lr=sgd_lr, momentum=momentum, nesterov=True), loss=dead_loss,
+    cut_net.compile(optimizer=SGD(learning_rate = sgd_lr, momentum=momentum, nesterov=True), loss=dead_loss,
                     metrics=metrics_cut)
 
     cut_net.fit(x_train, yt_train, callbacks=sgd_callbacks,
